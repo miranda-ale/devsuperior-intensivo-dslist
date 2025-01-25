@@ -2,13 +2,11 @@ package br.com.example.dslist.controllers;
 
 import br.com.example.dslist.dto.GameListDTO;
 import br.com.example.dslist.dto.GameMinDTO;
+import br.com.example.dslist.dto.ReplacementeDTO;
 import br.com.example.dslist.services.GameListService;
 import br.com.example.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +34,9 @@ public class GameListController {
         return result;
     }
 
+    @PostMapping(value = "/{listId}/replacement")
+    public void move(@PathVariable Long listId, @RequestBody ReplacementeDTO body) {
+        gameListService.move(listId, body.getSourceIndex(), body.getDestinationIndex());
+    }
 
 }
